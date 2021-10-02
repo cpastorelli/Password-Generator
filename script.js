@@ -1,9 +1,8 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-//var passLength;
-//var addUppercase;
+
 //var addNumeric;
-var addSpecial;
+//var addSpecial;
 
 
 var upperElem = "ABCDEFGHIJKLMNOPQURSTVWXYZ";
@@ -17,18 +16,18 @@ function beginCriteria() {
   //Prompt asking for password length
   var passLength = getPassLength();
   console.log("Password length: " + passLength); //take me out in the end
-//I have a number variable here. So I need to make sure something happens where I can make an array?
-//That way I can add it all together in the end
+  //I have a number variable here. So I need to make sure something happens where I can make an array?
+  //That way I can add it all together in the end
 
-
+  var addUppercase = withUpper();
+  console.log("Am I adding Uppercases? " + addUppercase); //Take me out in the end
 
 }
-
 
 //Prompt 1: Length (8-128 characters)
 function getPassLength() {
  
-  //As long as the lengthSelect variable is:
+  //lengthSelect must be:
   // 1. a number 
   //2. is at least 8 characters long 
   //3. no more than 128 characters long
@@ -44,18 +43,25 @@ function getPassLength() {
   return lengthSelect;
 }
 
+//Prompt 2: Uppercase
+function withUpper() {
+  do {
+    var withUppercase = prompt("Will you need any uppercase letters? \n Type yes or no");
+    withUppercase = withUppercase.toLowerCase();
 
+    console.log(withUppercase); //Take me out in the end
+    //validate Yes no response
+  } while(withUppercase !== "no"  && withUppercase !== "yes");
 
-
-
-
-
-
+  return withUppercase;
+}
 
 
 
 //validate yes no respones
 //prompt 4: Special Characters
+
+function addSpecial
 //validate yes no response
 //All Prompts answered- password is generated to match criteria
 //display the password written on page or as alert
