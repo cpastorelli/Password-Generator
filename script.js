@@ -1,6 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-//var passLength;
+var passLength;
 var addUppercase;
 var addNumeric;
 var addSpecial;
@@ -15,10 +15,7 @@ var specialElem = "!@#$%^&**()";
 //Now I get prompts
 //Prompt 1: Length (8-128 characters)
 //validate correct numbers and parameters
-function generateAPassword(){
-  var passLength = getPassLength();
-
-}
+passLength = getPassLength();
 
 
 
@@ -30,9 +27,10 @@ function getPassLength() {
     text = "Input not valid";
   } else {
 
-    text = "Alright! Next question..."
+    text = "Alright! You entered the number NUMBERVALUE HERE. Next question..."
   }
 
+  return passLength;
 }
 
 
