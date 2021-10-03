@@ -23,7 +23,9 @@ function beginCriteria() {
   var addNum = withNumbers();
   console.log("Am I adding numbers? " + addNum); //Take me out in the end
 
- 
+  var addSpecial = withSpecial();
+  console.log("Am I adding special characters? " + addSpecial);
+
 
 }
 
@@ -74,6 +76,20 @@ function withNumbers() {
   return addNumeric;
 }
 
+//prompt 4: Special Characters
+function withSpecial(){
+
+  do{
+
+    var addSpecial = prompt("Do you want special characters in your password? \n type yes or no");
+
+    addSpecial = addSpecial.toLowerCase();
+
+    //validate yes no response
+  }while(addSpecial !== "no"  && addSpecial !== "yes");
+
+  return addSpecial;
+}
 
 
 // Write password to the #password input
