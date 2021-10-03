@@ -1,35 +1,39 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var upperElem = "ABCDEFGHIJKLMNOPQURSTVWXYZ";
-var lowerElem = "abcdefghijklmnopqrstuvwxyz";
-var numericElem ="0123456789";
-var specialElem = "!@#$%^&**()";
+//create potential password values, separated by user requirements
+const lower_case = "abcdefghijklmnopqrstuvwxyz";
+const upper_case = lower_case.toUpperCase();
+const num_required = "0123456789";
+const sym_required = "!@#$%^&*()";
 
-//click button to make a password
+//click button to make password criteria prompts
 function beginCriteria() {
-
+  
   //Prompt asking for password length
   var passLength = getPassLength();
-  console.log("Password length: " + passLength); //take me out in the end
-  //I have a number variable here. So I need to make sure something happens where I can make an array?
-  //That way I can add it all together in the end
-
+  
   //Prompt asking if uppercase letters are needed
-  var addUppercase = withUpper();
-  console.log("Am I adding Uppercases? " + addUppercase); //Take me out in the end
-
+  var addUpper = withUpper();
+  
   //Prompt asking if numbers are needed
   var addNum = withNumbers();
-  console.log("Am I adding numbers? " + addNum); //Take me out in the end
+  
+  //Prompt asking is special characters are needed
+  var addSym = withSpecial();
+  
+  //Turning the string into an array and randomizing characters
+  var thePasswordString = createPasswordString(addUpper, addNum, addSym);
+  
+  //cutting the string down to the length required
+  var thePassword = thePasswordString.substring(0, passLength);
 
-  var addSpecial = withSpecial();
-  console.log("Am I adding special characters? " + addSpecial);
-
-
+  //save value of thePassword to the id = password value
+  document.getElementById("password").value = thePassword;
+  return;
 }
 
-//Prompt 1: Length (8-128 characters)
+//Prompt 1: Length
 function getPassLength() {
  
   //lengthSelect must be:
@@ -43,6 +47,10 @@ function getPassLength() {
     //validate correct numbers and parameters
   } while (isNaN(lengthSelect) || lengthSelect < 8 || lengthSelect > 128);
   
+  //turn string input into number
+  lengthSelect = Number(lengthSelect);
+
+  // return number
   return lengthSelect;
 }
 
@@ -58,6 +66,7 @@ function withUpper() {
     //validate Yes no response
   } while(withUppercase !== "no"  && withUppercase !== "yes");
 
+  //return yes no string value
   return withUppercase;
 }
 
@@ -73,6 +82,7 @@ function withNumbers() {
     //validate yes no respones
   }while(addNumeric !== "no"  && addNumeric !== "yes");
 
+  //return yes no string value
   return addNumeric;
 }
 
@@ -81,27 +91,56 @@ function withSpecial(){
 
   do{
 
-    var addSpecial = prompt("Do you want special characters in your password? \n type yes or no");
-
-    addSpecial = addSpecial.toLowerCase();
+    var addSymb = prompt("Do you want special characters in your password? \n type yes or no");
+    
+    addSymb = addSymb.toLowerCase();
 
     //validate yes no response
-  }while(addSpecial !== "no"  && addSpecial !== "yes");
+  }while(addSymb !== "no"  && addSymb !== "yes");
 
-  return addSpecial;
+  //return yes no string value
+  return addSymb;
 }
 
+//random number generator
+function createPasswordString(upper, num, sym){
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  //Create basic password string using only lowercase characters
+ let basicPass = lower_case;
+ 
+ //if user typed yes, concat uppercase characters to basicPass
+ if (upper === "yes") basicPass += upper_case;
+ 
+ //if user typed yes, concat number characters to basicPass
+ if (num === "yes")  basicPass += num_required;
+ 
+ //if user typed yes, concat symbol characters to basicPass
+ if (sym === "yes")  basicPass += sym_required;
 
-  passwordText.value = password;
+ //Turn password string into an array
+ var ArrayPass = Array.from(basicPass);
 
+
+for(var i =0; i < ArrayPass.length; i++) {
+
+  //create a random number via number generator
+  var rand = Math.floor(Math.random()* ArrayPass.length - 1);
+
+  //create a temporary value placeholder
+  var temp = ArrayPass[i];
+
+  // save value from random number index in array, and save to index i of array
+  ArrayPass[i] = ArrayPass[rand];
+
+  //have value in random number index now be temporary value placeholder
+  ArrayPass[rand] = temp;
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+//Turn array back into a string using join
+ basicPass = ArrayPass.join ("");
+ 
+ //return string value
+ return basicPass;
+}
 
 
