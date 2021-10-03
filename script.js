@@ -1,10 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-//var addNumeric;
-//var addSpecial;
-
-
 var upperElem = "ABCDEFGHIJKLMNOPQURSTVWXYZ";
 var lowerElem = "abcdefghijklmnopqrstuvwxyz";
 var numericElem ="0123456789";
@@ -19,8 +15,15 @@ function beginCriteria() {
   //I have a number variable here. So I need to make sure something happens where I can make an array?
   //That way I can add it all together in the end
 
+  //Prompt asking if uppercase letters are needed
   var addUppercase = withUpper();
   console.log("Am I adding Uppercases? " + addUppercase); //Take me out in the end
+
+  //Prompt asking if numbers are needed
+  var addNum = withNumbers();
+  console.log("Am I adding numbers? " + addNum); //Take me out in the end
+
+ 
 
 }
 
@@ -38,33 +41,38 @@ function getPassLength() {
     //validate correct numbers and parameters
   } while (isNaN(lengthSelect) || lengthSelect < 8 || lengthSelect > 128);
   
-  console.log(isNaN(lengthSelect)); //Take me out in the end
-
   return lengthSelect;
 }
 
 //Prompt 2: Uppercase
 function withUpper() {
+
   do {
+
     var withUppercase = prompt("Will you need any uppercase letters? \n Type yes or no");
+
     withUppercase = withUppercase.toLowerCase();
 
-    console.log(withUppercase); //Take me out in the end
     //validate Yes no response
   } while(withUppercase !== "no"  && withUppercase !== "yes");
 
   return withUppercase;
 }
 
+//Prompt 3: Numeric
+function withNumbers() {
 
+  do{
 
-//validate yes no respones
-//prompt 4: Special Characters
+    var  addNumeric = prompt("Do you want numbers in your password? \n Type yes or no");
 
-function addSpecial
-//validate yes no response
-//All Prompts answered- password is generated to match criteria
-//display the password written on page or as alert
+    addNumeric = addNumeric.toLowerCase();
+
+    //validate yes no respones
+  }while(addNumeric !== "no"  && addNumeric !== "yes");
+
+  return addNumeric;
+}
 
 
 
