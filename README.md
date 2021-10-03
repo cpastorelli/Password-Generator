@@ -15,7 +15,7 @@ I did make the mistake of going down the rabbit hole and attempted to make multi
 
 I feel like I was able to have some fun with making functions and working with different types of loops. I would like to work more on traversing the DOM next time. 
 
-![Password Generator](./assets/Images/password-generator.png)
+![Password Generator](./Assets/Images/password-generator.png)
 ## Built With:
 - HTML
 - CSS
