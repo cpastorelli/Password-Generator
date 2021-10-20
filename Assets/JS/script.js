@@ -1,5 +1,5 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+
 
 //create potential password values, separated by user requirements
 const lower_case = "abcdefghijklmnopqrstuvwxyz";
@@ -23,7 +23,7 @@ function beginCriteria() {
   var addSym = withSpecial();
   
   //Turning the string into an array and randomizing characters
-  var thePasswordString = createPasswordString(addUpper, addNum, addSym);
+  var thePasswordString = createPasswordString(addUpper, addNum, addSym, passLength);
   
   //cutting the string down to the length required
   var thePassword = thePasswordString.substring(0, passLength);
@@ -103,7 +103,7 @@ function withSpecial(){
 }
 
 //random number generator
-function createPasswordString(upper, num, sym){
+function createPasswordString(upper, num, sym, pLength){
 
   //Create basic password string using only lowercase characters
  let basicPass = lower_case;
@@ -117,30 +117,38 @@ function createPasswordString(upper, num, sym){
  //if user typed yes, concat symbol characters to basicPass
  if (sym === "yes")  basicPass += sym_required;
 
+  // check if the length required for the password is at least 128 characters long
+  // if not, add potential password to itself until criteria is met
+ while (basicPass.length < 128 ) {
+    // 
+    basicPass += basicPass;
+  }
+ 
+
  //Turn password string into an array
  var ArrayPass = Array.from(basicPass);
+ 
+  for(var i =0; i < ArrayPass.length; i++) {
 
+   //create a random number via number generator
+    var rand = Math.floor(Math.random()* ArrayPass.length - 1);
 
-for(var i =0; i < ArrayPass.length; i++) {
+   //create a temporary value placeholder
+    var temp = ArrayPass[i];
 
-  //create a random number via number generator
-  var rand = Math.floor(Math.random()* ArrayPass.length - 1);
+   // save value from random number index in array, and save to index i of array
+    ArrayPass[i] = ArrayPass[rand];
 
-  //create a temporary value placeholder
-  var temp = ArrayPass[i];
+   //have value in random number index now be temporary value placeholder
+   ArrayPass[rand] = temp;
+  }
 
-  // save value from random number index in array, and save to index i of array
-  ArrayPass[i] = ArrayPass[rand];
-
-  //have value in random number index now be temporary value placeholder
-  ArrayPass[rand] = temp;
-}
-
-//Turn array back into a string using join
- basicPass = ArrayPass.join ("");
+ //Turn array back into a string using join
+ basicPass = ArrayPass.join("");
  
  //return string value
  return basicPass;
 }
 
-
+//onclick event to call start password generation. 
+document.getElementById("generate").onclick = beginCriteria;

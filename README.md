@@ -30,6 +30,7 @@ project link: (https://cpastorelli.github.io/Password-Generator/)
 
 ## Acknowledgements
 - [Button Click to Initiate Prompt](https://stackoverflow.com/questions/37287093/starting-a-javascript-prompt-after-a-button-is-clicked)
+-[Event Handlers (Not inline)](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
 - [Review of Onclick = "function()"](https://dev.to/code_mystery/random-password-generator-using-javascript-6a)
 - [Getting User Input and Using Prompt](https://www.mikedane.com/web-development/javascript/getting-user-input/)
 - [Ensure Number Validation](https://www.w3schools.com/js/tryit.asp?filename=tryjs_validation_number)

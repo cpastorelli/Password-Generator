@@ -1,9 +1,11 @@
+/* document settings, including before and after for box sizing */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* html and body settings for height, margin, and padding */
 html,
 body,
 .wrapper {
@@ -12,17 +14,20 @@ body,
   padding: 0;
 }
 
+/* body settings for background and font family */
 body {
   font-family: sans-serif;
   background-color: #f9fbfd;
 }
 
+/* class wrapper settings for padding top/left/right */
 .wrapper {
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
+/* header settings */
 header {
   text-align: center;
   padding: 20px;
@@ -30,6 +35,8 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+/* class card settings for text alignment, background color, border radius and width, box shadow, 
+color of text, font size, margin, max width and padding */
 .card {
   text-align: center;
   background-color: hsl(0, 0%, 100%);
@@ -43,6 +50,7 @@ header {
   padding: 30px 40px;
 }
 
+/* header card settings before event handler */
 .card-header::after {
   content: " ";
   display: block;
@@ -51,14 +59,17 @@ header {
   height: 2px;
 }
 
+/* body card settings for height */
 .card-body {
   min-height: 100px;
 }
 
+/* footer card settings for text alignment */
 .card-footer {
   text-align: center;
 }
 
+/* footer card settings before event */
 .card-footer::before {
   content: " ";
   display: block;
@@ -67,12 +78,14 @@ header {
   height: 2px;
 }
 
+/* footer card settings for after event */
 .card-footer::after {
   content: " ";
   display: block;
   clear: both;
 }
 
+/* button settings */
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);
@@ -89,15 +102,18 @@ header {
   cursor: pointer;
 }
 
+/* button disabled settings */
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
 }
 
+/* float right class */
 .float-right {
   float: right;
 }
 
+/* password id settings */
 #password {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -119,6 +135,7 @@ button[disabled] {
   overflow: hidden;
 }
 
+/* media query for screens larger than avg cell phone viewport size */
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
@@ -131,6 +148,7 @@ button[disabled] {
   }
 }
 
+/* media query for average cell phone cell phone size */
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
