@@ -1,100 +1,53 @@
 // Assignment Code
-
-
 //create potential password values, separated by user requirements
 const lower_case = "abcdefghijklmnopqrstuvwxyz";
 const upper_case = lower_case.toUpperCase();
 const num_required = "0123456789";
 const sym_required = "!@#$%^&*()";
+const prompt1 = "Will you need any uppercase letters?";
+const prompt2 = "Do you want numbers in your password? ";
+const prompt3 = "Do you want special characters in your password?";
+const promptEnd = "\n type yes or no";
 
 //click button to make password criteria prompts
 function beginCriteria() {
-  
   //Prompt asking for password length
-  var passLength = getPassLength();
-  
+  let passLength = getPassLength();
   //Prompt asking if uppercase letters are needed
-  var addUpper = withUpper();
-  
+  let addUpper = setPreferences(prompt1, promptEnd);
   //Prompt asking if numbers are needed
-  var addNum = withNumbers();
-  
+  let addNum = setPreferences(prompt2, promptEnd);
   //Prompt asking is special characters are needed
-  var addSym = withSpecial();
-  
+  let addSym = setPreferences(prompt3, promptEnd);
   //Turning the string into an array and randomizing characters
-  var thePasswordString = createPasswordString(addUpper, addNum, addSym, passLength);
-  
+  let thePasswordString = createPasswordString(addUpper, addNum, addSym, passLength);
   //cutting the string down to the length required
-  var thePassword = thePasswordString.substring(0, passLength);
-
+  let thePassword = thePasswordString.substring(0, passLength);
   //save value of thePassword to the id = password value
   document.getElementById("password").value = thePassword;
   return;
 }
 
-//Prompt 1: Length
+//Prompt 1: Length: min 8 characters, max 128 characters
 function getPassLength() {
- 
-  //lengthSelect must be:
-  // 1. a number 
-  //2. is at least 8 characters long 
-  //3. no more than 128 characters long
   do{
 
     var lengthSelect = prompt("How long of a password do you need?");
-    
     //validate correct numbers and parameters
   } while (isNaN(lengthSelect) || lengthSelect < 8 || lengthSelect > 128);
   
   //turn string input into number
   lengthSelect = Number(lengthSelect);
-
   // return number
   return lengthSelect;
 }
 
-//Prompt 2: Uppercase
-function withUpper() {
-
-  do {
-
-    var withUppercase = prompt("Will you need any uppercase letters? \n Type yes or no");
-
-    withUppercase = withUppercase.toLowerCase();
-
-    //validate Yes no response
-  } while(withUppercase !== "no"  && withUppercase !== "yes");
-
-  //return yes no string value
-  return withUppercase;
-}
-
-//Prompt 3: Numeric
-function withNumbers() {
-
+//all prompts: only thing that changes is the prompt.....
+function setPreferences(phrase1, phrase2){
   do{
 
-    var  addNumeric = prompt("Do you want numbers in your password? \n Type yes or no");
-
-    addNumeric = addNumeric.toLowerCase();
-
-    //validate yes no respones
-  }while(addNumeric !== "no"  && addNumeric !== "yes");
-
-  //return yes no string value
-  return addNumeric;
-}
-
-//prompt 4: Special Characters
-function withSpecial(){
-
-  do{
-
-    var addSymb = prompt("Do you want special characters in your password? \n type yes or no");
-    
+    var addSymb = prompt(phrase1 + phrase2);
     addSymb = addSymb.toLowerCase();
-
     //validate yes no response
   }while(addSymb !== "no"  && addSymb !== "yes");
 
@@ -110,42 +63,34 @@ function createPasswordString(upper, num, sym, pLength){
  
  //if user typed yes, concat uppercase characters to basicPass
  if (upper === "yes") basicPass += upper_case;
- 
  //if user typed yes, concat number characters to basicPass
  if (num === "yes")  basicPass += num_required;
- 
  //if user typed yes, concat symbol characters to basicPass
  if (sym === "yes")  basicPass += sym_required;
 
   // check if the length required for the password is at least 128 characters long
-  // if not, add potential password to itself until criteria is met
+  // if not, add potential password to itself until length max has been achieved
  while (basicPass.length < 128 ) {
-    // 
     basicPass += basicPass;
   }
- 
 
  //Turn password string into an array
- var ArrayPass = Array.from(basicPass);
+ let ArrayPass = Array.from(basicPass);
  
-  for(var i =0; i < ArrayPass.length; i++) {
-
+ for(let i =0; i < ArrayPass.length; i++) {
    //create a random number via number generator
-    var rand = Math.floor(Math.random()* ArrayPass.length - 1);
-
+   let rand = Math.floor(Math.random()* ArrayPass.length - 1);
    //create a temporary value placeholder
-    var temp = ArrayPass[i];
+   let temp = ArrayPass[i];
 
    // save value from random number index in array, and save to index i of array
-    ArrayPass[i] = ArrayPass[rand];
-
+   ArrayPass[i] = ArrayPass[rand];
    //have value in random number index now be temporary value placeholder
    ArrayPass[rand] = temp;
   }
 
  //Turn array back into a string using join
  basicPass = ArrayPass.join("");
- 
  //return string value
  return basicPass;
 }
